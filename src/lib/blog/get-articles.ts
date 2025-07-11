@@ -1,4 +1,4 @@
-'use server';
+// Fichier adapté pour l'export statique
 
 import fs from 'fs';
 import path from 'path';
