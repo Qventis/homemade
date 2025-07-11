@@ -1,0 +1,108 @@
+---
+title: "Next.js 14 et App Router : Le Guide Complet pour 2024"
+excerpt: "Découvrez toutes les nouveautés de Next.js 14, du nouvel App Router aux Server Components. Un guide pratique avec exemples concrets."
+category: "Développement Web"
+author: "Jean Dupont"
+date: "2024-01-15"
+tags: ["Next.js", "React", "Server Components", "Performance"]
+image: "/images/blog/nextjs-guide.jpg"
+featured: true
+views: 2547
+likes: 128
+---
+
+# Next.js 14 et App Router : Le Guide Complet pour 2024
+
+Next.js 14 a introduit de nombreuses fonctionnalités révolutionnaires qui transforment notre façon de développer des applications web modernes. Dans cet article, nous explorerons en profondeur le nouvel App Router, les Server Components, et toutes les optimisations qui font de Next.js 14 un framework incontournable.
+
+## L'App Router : Une Nouvelle Approche du Routing
+
+L'App Router représente un changement de paradigme dans la façon dont Next.js gère les routes. Voici pourquoi c'est important :
+
+### Structure basée sur les dossiers
+
+La nouvelle structure de routing basée sur les dossiers est plus intuitive et offre une meilleure organisation du code :
+
+```jsx
+// app/dashboard/page.tsx
+export default function DashboardPage() {
+  return <main>Tableau de bord</main>;
+}
+```
+
+### Nested Layouts
+
+Les layouts imbriqués vous permettent de partager des éléments d'interface entre plusieurs pages sans recharger ces composants lors de la navigation :
+
+```jsx
+// app/dashboard/layout.tsx
+export default function DashboardLayout({ children }) {
+  return (
+    <div className="dashboard-container">
+      <aside>Menu latéral</aside>
+      <main>{children}</main>
+    </div>
+  );
+}
+```
+
+## Server Components : Performance et Sécurité
+
+Les Server Components sont l'une des innovations majeures de Next.js 14. Ils offrent :
+
+<Callout type="info">
+  Les Server Components sont rendus uniquement sur le serveur et n'augmentent pas la taille du bundle JavaScript envoyé au client.
+</Callout>
+
+### Avantages principaux
+
+- **Performance améliorée** : Réduction significative du JavaScript côté client
+- **Sécurité renforcée** : Accès aux ressources sensibles sans exposition au client
+- **Meilleur SEO** : Le contenu est entièrement généré côté serveur
+
+### Exemple concret
+
+<CodeBlock language="typescript">
+// Un Server Component qui accède directement à la base de données
+import { db } from '@/lib/db';
+
+export default async function UserProfile({ userId }) {
+  // Cette requête s'exécute sur le serveur, jamais exposée au client
+  const user = await db.users.findUnique({ where: { id: userId } });
+  
+  return (
+    <div>
+      <h2>{user.name}</h2>
+      <p>{user.email}</p>
+    </div>
+  );
+}
+</CodeBlock>
+
+## Génération Statique Incrémentale (ISR)
+
+Next.js 14 a perfectionné l'ISR, permettant une mise en cache intelligente avec revalidation :
+
+```jsx
+// Revalidation toutes les heures
+export const revalidate = 3600;
+
+export default async function BlogPage() {
+  const posts = await fetchBlogPosts();
+  return (
+    <div>
+      {posts.map(post => (
+        <BlogCard key={post.id} post={post} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+Next.js 14 représente une évolution majeure pour le développement web moderne. L'App Router et les Server Components transforment notre approche du développement d'applications React, offrant une expérience développeur améliorée et des performances optimales pour les utilisateurs.
+
+![Next.js Dashboard](/images/blog/nextjs-dashboard.jpg)
+
+Prêt à migrer vers Next.js 14 ? N'hésitez pas à nous contacter pour vous accompagner dans cette transition importante.

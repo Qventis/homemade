@@ -1,0 +1,23 @@
+# Robots.txt pour Qventis
+User-agent: *
+Allow: /
+
+# Blocs des pages privées
+Disallow: /private/
+Disallow: /admin/
+
+# Optimisation pour Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+# Autres bots de moteurs de recherche
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap
+Sitemap: https://qventis.com/sitemap.xml

@@ -1,0 +1,105 @@
+---
+title: "Next.js 14 et App Router : Le Guide Complet pour 2024"
+excerpt: "Découvrez toutes les nouveautés de Next.js 14, du nouvel App Router aux Server Components. Un guide pratique avec exemples concrets."
+category: "Développement Web"
+author: "Thomas Qventis"
+date: "2024-01-15"
+readTime: "8 min"
+image: "/api/placeholder/600/400"
+featured: true
+views: 2847
+likes: 142
+tags: ["Next.js", "React", "App Router", "SSR"]
+---
+
+# Next.js 14 et App Router : Le Guide Complet pour 2024
+
+Next.js 14 est sorti avec plusieurs améliorations majeures qui changent la façon dont nous développons des applications web modernes. Ce guide vous présente en détail les nouveautés et comment les utiliser efficacement dans vos projets.
+
+## Les grandes nouveautés de Next.js 14
+
+Next.js 14 apporte plusieurs améliorations significatives par rapport aux versions précédentes :
+
+- **App Router** : Le nouveau système de routage basé sur les dossiers
+- **Server Components** : Rendus côté serveur pour de meilleures performances
+- **Streaming** : Chargement progressif des composants
+- **Turbopack** : Un bundler plus rapide pour le développement
+- **Amélioration des performances** : Optimisations du rendu et du chargement
+
+## Comment utiliser le App Router
+
+L'App Router est une nouvelle façon d'organiser vos routes dans Next.js, basée sur la structure de dossiers. Voici comment l'utiliser :
+
+```tsx
+// app/page.tsx - Page d'accueil (route /)
+export default function Home() {
+  return <h1>Accueil</h1>;
+}
+
+// app/blog/page.tsx - Page de blog (route /blog)
+export default function Blog() {
+  return <h1>Blog</h1>;
+}
+
+// app/blog/[slug]/page.tsx - Page d'article dynamique (route /blog/:slug)
+export default function Article({ params }) {
+  return <h1>Article: {params.slug}</h1>;
+}
+```
+
+## Les Server Components
+
+Les Server Components sont rendus exclusivement côté serveur, ce qui permet d'améliorer les performances et de réduire le JavaScript envoyé au client.
+
+```tsx
+// Composant serveur (par défaut)
+export default function ServerComponent() {
+  // Ce code s'exécute uniquement sur le serveur
+  return <h1>Je suis un Server Component</h1>;
+}
+
+// Composant client (explicite)
+'use client';
+
+import { useState } from 'react';
+
+export default function ClientComponent() {
+  const [count, setCount] = useState(0);
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Compteur: {count}
+    </button>
+  );
+}
+```
+
+## Le Data Fetching avec App Router
+
+Next.js 14 simplifie considérablement le data fetching :
+
+```tsx
+// app/products/page.tsx
+export default async function ProductsPage() {
+  // Fetching de données directement dans le composant
+  const products = await fetch('https://api.example.com/products').then(
+    (res) => res.json()
+  );
+
+  return (
+    <div>
+      <h1>Produits</h1>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Conclusion
+
+Next.js 14 représente une évolution majeure du framework avec des changements qui améliorent significativement l'expérience de développement et les performances des applications. L'App Router, les Server Components et les nouvelles méthodes de data fetching vous permettent de construire des applications web plus performantes et mieux organisées.
+
+Pour aller plus loin, explorez la [documentation officielle de Next.js](https://nextjs.org/docs) qui détaille toutes ces nouveautés avec des exemples concrets.
